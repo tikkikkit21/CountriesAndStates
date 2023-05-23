@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+# Countries and States
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Your wrap-up exercise for your onboarding is to make a website (can be just a single HTML page) that will use JavaScript to get data from an external REST API.  The details are as follows:
 
-## Available Scripts
+1. When the page loads, populate a dropdown menu with the results from a `GET` call to `https://xc-countries-api.fly.dev/api/countries/`
+2. When a country is selected from the country dropdown, populate a second dropdown with the results from a `GET` call to `https://xc-countries-api.fly.dev/api/countries/<country_code>/states/`
+3. Once all of that is done, create a way to add a new country by sending a `POST` call to `https://xc-countries-api.fly.dev/api/countries/`
+5. Create a way to add new states by sending a `POST` call to `https://xc-countries-api.fly.dev/api/states/`
 
-In the project directory, you can run:
+[Insomnia](https://insomnia.rest) and [Postman](https://www.postman.com) are tools for interacting with REST APIs (which is what `https://xc-countries-api.fly.dev/api/` is), so feel free to use them to experiment and understand the data your page will be receiving from the `GET` requests, and what it should send in a `POST` request.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Stretch Goals
+You may be referred to these activities by your mentor after completing the standard behavior described above. They are intended to increase your experience and understanding of a particular technology stack.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+#### React Frontend:
+ - Same behavior as the standard frontend, but written in ReactJS with reusable components. 
+ - Dropdown behavior can be shared for Countries and States and configured via props.
+ - A good primer on `bind` in JavaScript and it's use in ReactJS: [Explaining why we bind things in React](https://gist.github.com/fongandrew/f28245920a41788e084d77877e65f22f)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Django backend:
+ - Create a backend in Django that works with either Frontend
+ - Behavior should match the heroku endpoint, so the frontend code should only have to change to use a new base URL (get countries and get states for a country)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Django REST Framework Backend:
+ - Adapt the Django backend to [Django REST Framework](https://www.django-rest-framework.org/) using Serializers and APIView

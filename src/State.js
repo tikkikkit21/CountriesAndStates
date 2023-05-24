@@ -20,10 +20,9 @@ function State({code}) {
     return <Dropdown
         id ="states"
         menuLabel="state"
-        data={data}
-        optionName="name"
-        optionValue="code"
-        optionKey="id"
+        data={data.map(d => {
+            return {key: d.id, value: d.code, text: d.name}
+        })}
     />;
 }
 

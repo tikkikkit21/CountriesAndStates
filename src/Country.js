@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Dropdown from './Dropdown';
 
-function Country({handleInput}) {
+function Country({onChange}) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -20,11 +20,10 @@ function Country({handleInput}) {
     return <Dropdown
         id ="countries"
         menuLabel="country"
-        data={data}
-        handleInput={handleInput}
-        optionName="name"
-        optionValue="code"
-        optionKey="id"
+        data={data.map(d => {
+            return {key: d.id, value: d.code, text: d.name};
+        })}
+        onChange={onChange}
     />;
 }
 

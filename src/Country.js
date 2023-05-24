@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-function Country() {
+function Country({handleInput}) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -15,10 +15,10 @@ function Country() {
     return (
         <div className="dropdown">
             <form>
-                <label for="countries">Choose a country: </label>
-                <select name="countries" id="countries">
+                <label htmlFor="countries">Choose a country: </label>
+                <select name="countries" id="countries" onChange={handleInput}>
                     {
-                        data.map(d => <option value={d.name}>{d.name}</option>)
+                        data.map(d => <option key={d.code} value={d.code}>{d.name}</option>)
                     }
                 </select>
             </form>

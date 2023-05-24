@@ -1,21 +1,23 @@
+import {useState} from 'react';
 import './App.css';
+import Country from './Country';
+import State from './State';
 
 function App() {
+    const [code, setCode] = useState("");
+
+    function handleInput() {
+        const d = document.getElementById("countries").value;
+        setCode(d);
+    }
+
     return (
         <div className="app">
             <h1>Countries and States</h1>
-            <button className="dropdown" onClick={handleClickCountry}>Countries</button>
-            <button className="dropdown" onClick={handleClickState}>States</button>
+            <Country code={code} handleInput={handleInput}/>
+            <State code={code}/>
         </div>
     );
 }
 
 export default App;
-
-function handleClickCountry() {
-    console.log("Country button clicked");
-}
-
-function handleClickState() {
-    console.log("State button clicked")
-}

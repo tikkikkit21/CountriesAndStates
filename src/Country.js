@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import Dropdown from './Dropdown';
 
 function Country({handleInput}) {
     const [data, setData] = useState([]);
@@ -16,19 +17,15 @@ function Country({handleInput}) {
         .catch(err => console.error(err));
     }, [])
 
-    return (
-        <div className="dropdown">
-            <form>
-                <label htmlFor="countries">Choose a country: </label>
-                <select name="countries" id="countries" onChange={handleInput}>
-                    <option key="select" value="X">-Select a country-</option>
-                    {
-                        data.map(d => <option key={d.code} value={d.code}>{d.name}</option>)
-                    }
-                </select>
-            </form>
-        </div>
-    )
+    return <Dropdown
+        id ="countries"
+        menuLabel="country"
+        data={data}
+        handleInput={handleInput}
+        optionName="name"
+        optionValue="code"
+        optionKey="id"
+    />;
 }
 
 export default Country;

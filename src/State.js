@@ -6,8 +6,12 @@ function State({code}) {
     useEffect(() => {
         fetch(`https://xc-countries-api.fly.dev/api/countries/${code}/states/`)
         .then(res => res.json())
-        .then(data => {
-            setData(data);
+        .then(json => {
+            json.sort((a,b) => {
+                return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;
+            })
+            
+            setData(json);
         })
         .catch(err => console.error(err));
     }, [code])

@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import DropButton from './DropButton';
-import DropItem from './DropItem';
 
 function Country() {
     const [data, setData] = useState([]);
@@ -14,16 +12,16 @@ function Country() {
         .catch(err => console.error(err));
     })
 
-    function handleClick() {
-
-    }
-
     return (
-        <div className="country">
-            <DropButton name="Country" onClick={handleClick}/>
-            {
-                data.map(d => <DropItem name={d.name}/>)
-            }
+        <div className="dropdown">
+            <form>
+                <label for="countries">Choose a country: </label>
+                <select name="countries" id="countries">
+                    {
+                        data.map(d => <option value={d.name}>{d.name}</option>)
+                    }
+                </select>
+            </form>
         </div>
     )
 }

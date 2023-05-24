@@ -10,7 +10,7 @@ function State({code}) {
             setData(data);
         })
         .catch(err => console.error(err));
-    })
+    }, [code])
 
     return (
         <div className="dropdown">

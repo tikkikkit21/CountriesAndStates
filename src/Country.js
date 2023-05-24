@@ -10,7 +10,7 @@ function Country({handleInput}) {
             setData(data);
         })
         .catch(err => console.error(err));
-    })
+    }, [])
 
     return (
         <div className="dropdown">

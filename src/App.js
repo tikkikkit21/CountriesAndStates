@@ -4,7 +4,7 @@ import Country from './Country';
 import State from './State';
 
 function App() {
-    const [code, setCode] = useState("");
+    const [code, setCode] = useState("X"); // prevents invalid URL for state fetching
 
     function handleInput() {
         const d = document.getElementById("countries").value;

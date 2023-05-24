@@ -1,4 +1,21 @@
-select {
+body {
+    background-color: #DEBD95;
+    margin: 20px;
+}
+
+select, input {
     font-size: 20px;
-    margin: 10px;
+}
+
+select, input {
+    margin: 20px;
+}
+
+input {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+label {
+    font-size: 20px;
 }

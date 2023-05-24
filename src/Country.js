@@ -17,6 +17,7 @@ function Country({handleInput}) {
             <form>
                 <label htmlFor="countries">Choose a country: </label>
                 <select name="countries" id="countries" onChange={handleInput}>
+                    <option key="select" value="X">-Select a country-</option>
                     {
                         data.map(d => <option key={d.code} value={d.code}>{d.name}</option>)
                     }

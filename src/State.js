@@ -17,6 +17,7 @@ function State({code}) {
             <form>
                 <label htmlFor="states">Choose a state: </label>
                 <select name="states" id="states">
+                    <option key="select" value="X">-Select a state-</option>
                     {
                         data.map(d => <option key={d.code} value={d.name}>{d.name}</option>)
                     }

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Dropdown from './Dropdown'
 
-function State({code, update}) {
+function State({id, code, update}) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ function State({code, update}) {
     }, [code, update])
 
     return <Dropdown
-        id ="states"
+        id={id}
         menuLabel="state"
         data={data.map(d => {
             return {key: d.id, value: d.code, text: d.name}

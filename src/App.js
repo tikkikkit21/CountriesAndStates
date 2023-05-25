@@ -41,7 +41,7 @@ function App() {
     function onClickState() {
         const code = document.getElementById("code-state").value;
         const name = document.getElementById("name-state").value;
-        const countryId = document.getElementById("cid-state").value;
+        const countryId = document.getElementById("countries-state").value;
 
         fetch('https://xc-countries-api.fly.dev/api/states/', {
             method: 'POST',
@@ -67,25 +67,25 @@ function App() {
     return (
         <div className="app">
             <h1>Countries and States</h1>
-            <Country code={code} update={update} onChange={onChange}/>
-            <State code={code} update={update}/>
+            <Country id="countries" code={code} update={update} value="code" onChange={onChange}/>
+            <State id="states" code={code} update={update}/>
             <Input
                 label="country"
                 info={[
                     {name: "code", id: "code-country"},
                     {name: "name", id: "name-country"}
                 ]}
-                onClick={onClickCountry}
             />
+            <input type="submit" onClick={onClickCountry}/>
             <Input
                 label="state"
                 info={[
                     {name: "code", id: "code-state"},
-                    {name: "name", id: "name-state"},
-                    {name: "countryId", id: "cid-state"}
+                    {name: "name", id: "name-state"}
                 ]}
-                onClick={onClickState}
             />
+            <Country id="countries-state" code={code} update={update} value="id" onChange={onChange}/>
+            <input type="submit" onClick={onClickState}/>
         </div>
     );
 }

@@ -7,7 +7,7 @@ function Dropdown({id, menuLabel, data, onChange}) {
             <select name={id} id={id} onChange={onChange}>
                 <option key="select" value="X">-Select a {menuLabel}-</option>
                 {
-                    data.map(d => <option key={d.key} value={d.value}>{d.text}</option>)
+                    data.map(d => <option key={d.key} id={d.key} value={d.value}>{d.text}</option>)
                 }
             </select>
         </div>

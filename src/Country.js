@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Dropdown from './Dropdown';
 
-function Country({update, onChange}) {
+function Country({id, update, onChange, value}) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -18,10 +18,10 @@ function Country({update, onChange}) {
     }, [update])
 
     return <Dropdown
-        id ="countries"
+        id={id}
         menuLabel="country"
         data={data.map(d => {
-            return {key: d.id, value: d.code, text: d.name};
+            return {key: d.id, value: d[value], text: d.name};
         })}
         onChange={onChange}
     />;

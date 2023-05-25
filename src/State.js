@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Dropdown from './Dropdown'
 
-function State({code}) {
+function State({code, update}) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -15,7 +15,7 @@ function State({code}) {
             setData(json);
         })
         .catch(err => console.error(err));
-    }, [code])
+    }, [code, update])
 
     return <Dropdown
         id ="states"

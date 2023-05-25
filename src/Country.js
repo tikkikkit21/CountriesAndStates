@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Dropdown from './Dropdown';
 
-function Country({onChange}) {
+function Country({update, onChange}) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -15,7 +15,7 @@ function Country({onChange}) {
             setData(json);
         })
         .catch(err => console.error(err));
-    }, [])
+    }, [update])
 
     return <Dropdown
         id ="countries"

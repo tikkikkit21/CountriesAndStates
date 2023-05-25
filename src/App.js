@@ -6,6 +6,7 @@ import Input from './Input';
 
 function App() {
     const [code, setCode] = useState("X"); // prevents invalid URL for state fetching
+    const [update, setUpdate] = useState(true);
 
     function onChange() {
         const d = document.getElementById("countries").value;
@@ -26,6 +27,7 @@ function App() {
         }).then(res => {
             if (res.ok) {
                 alert (`The ${name} country was succesfully added!`);
+                setUpdate(!update);
             } else {
                 alert("Country was unable to be added");
                 console.error(res);
@@ -51,6 +53,7 @@ function App() {
         }).then(res => {
             if (res.ok) {
                 alert (`The ${name} state was succesfully added!`);
+                setUpdate(!update);
             } else {
                 alert("State was unable to be added");
                 console.error(res);
@@ -64,8 +67,8 @@ function App() {
     return (
         <div className="app">
             <h1>Countries and States</h1>
-            <Country code={code} onChange={onChange}/>
-            <State code={code}/>
+            <Country code={code} update={update} onChange={onChange}/>
+            <State code={code} update={update}/>
             <Input
                 label="country"
                 info={[

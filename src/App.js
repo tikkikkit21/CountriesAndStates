@@ -22,7 +22,7 @@ function App() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "code": code, "name": name })
+            body: JSON.stringify({"code": code, "name": name})
         }).then(res => {
             if (res.ok) {
                 alert (`The ${name} country was succesfully added!`);
@@ -47,16 +47,16 @@ function App() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "code": code, "name": name, "countryId": countryId})
+            body: JSON.stringify({"code": code, "name": name, "countryId": countryId})
         }).then(res => {
             if (res.ok) {
-                alert (`The ${name} country was succesfully added!`);
+                alert (`The ${name} state was succesfully added!`);
             } else {
-                alert("Country was unable to be added");
+                alert("State was unable to be added");
                 console.error(res);
             }
         }).catch(err => {
-            alert("Country was unable to be added");
+            alert("State was unable to be added");
             console.error(err)
         });
     }

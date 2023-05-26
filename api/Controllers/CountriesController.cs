@@ -84,10 +84,17 @@ namespace api.Controllers
             {
                 return Problem("Entity set 'CountryContext.Countries'  is null.");
             }
-            _context.Countries.Add(country);
+
+            var newCountry = new Country
+            {
+                name = country.name,
+                code = country.code
+            };
+
+            _context.Countries.Add(newCountry);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCountry), new { id = country.id }, country);
+            return CreatedAtAction(nameof(GetCountry), new { id = newCountry.id }, newCountry);
         }
 
         // DELETE: api/Countries/5

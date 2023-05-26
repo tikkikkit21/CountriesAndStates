@@ -9,7 +9,7 @@ using XC.Models;
 
 namespace api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/States")]
     [ApiController]
     public class StateController : ControllerBase
     {

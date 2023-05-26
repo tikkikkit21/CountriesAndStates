@@ -92,7 +92,7 @@ namespace api.Controllers
             _context.Countries.Add(country);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCountry", new { id = country.id }, country);
+            return CreatedAtAction(nameof(GetCountry), new { id = country.id }, country);
         }
 
         // DELETE: api/Countries/5

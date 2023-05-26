@@ -92,7 +92,7 @@ namespace api.Controllers
             _context.States.Add(state);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetState", new { id = state.id }, state);
+            return CreatedAtAction(nameof(GetState), new { id = state.id }, state);
         }
 
         // DELETE: api/State/5

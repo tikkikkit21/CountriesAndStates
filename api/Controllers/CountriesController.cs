@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using XC.Models;
@@ -24,10 +19,10 @@ namespace api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Country>>> GetCountries()
         {
-          if (_context.Countries == null)
-          {
-              return NotFound();
-          }
+            if (_context.Countries == null)
+            {
+                return NotFound();
+            }
             return await _context.Countries.ToListAsync();
         }
 
@@ -35,10 +30,10 @@ namespace api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Country>> GetCountry(int id)
         {
-          if (_context.Countries == null)
-          {
-              return NotFound();
-          }
+            if (_context.Countries == null)
+            {
+                return NotFound();
+            }
             var country = await _context.Countries.FindAsync(id);
 
             if (country == null)
@@ -85,10 +80,10 @@ namespace api.Controllers
         [HttpPost]
         public async Task<ActionResult<Country>> PostCountry(Country country)
         {
-          if (_context.Countries == null)
-          {
-              return Problem("Entity set 'CountryContext.Countries'  is null.");
-          }
+            if (_context.Countries == null)
+            {
+                return Problem("Entity set 'CountryContext.Countries'  is null.");
+            }
             _context.Countries.Add(country);
             await _context.SaveChangesAsync();
 

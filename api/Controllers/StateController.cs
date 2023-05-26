@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using XC.Models;
@@ -24,10 +19,10 @@ namespace api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<State>>> GetStates()
         {
-          if (_context.States == null)
-          {
-              return NotFound();
-          }
+            if (_context.States == null)
+            {
+                return NotFound();
+            }
             return await _context.States.ToListAsync();
         }
 
@@ -35,10 +30,10 @@ namespace api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<State>> GetState(int id)
         {
-          if (_context.States == null)
-          {
-              return NotFound();
-          }
+            if (_context.States == null)
+            {
+                return NotFound();
+            }
             var state = await _context.States.FindAsync(id);
 
             if (state == null)
@@ -85,10 +80,10 @@ namespace api.Controllers
         [HttpPost]
         public async Task<ActionResult<State>> PostState(State state)
         {
-          if (_context.States == null)
-          {
-              return Problem("Entity set 'StateContext.States'  is null.");
-          }
+            if (_context.States == null)
+            {
+                return Problem("Entity set 'StateContext.States'  is null.");
+            }
             _context.States.Add(state);
             await _context.SaveChangesAsync();
 

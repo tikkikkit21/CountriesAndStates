@@ -9,10 +9,12 @@ namespace api.Controllers
     public class CountriesController : ControllerBase
     {
         private readonly CountryContext _context;
+        private readonly StateContext _scontext;
 
-        public CountriesController(CountryContext context)
+        public CountriesController(CountryContext context, StateContext scontext)
         {
             _context = context;
+            _scontext = scontext;
         }
 
         // GET: api/Countries
@@ -42,6 +44,25 @@ namespace api.Controllers
             }
 
             return country;
+        }
+
+        [HttpGet("{code}/states")]
+        public async Task<ActionResult<IEnumerable<State>>> GetStates(string? code)
+        {
+            if (_context.Countries == null)
+            {
+                return NotFound();
+            }
+
+            var country =  _context.Countries.Single<Country>(c => c.code.Equals(code));
+            var stateList = _scontext.States.Where(s => s.countryId == country.id);
+
+            if (stateList == null)
+            {
+                return NotFound();
+            }
+
+            return await stateList.ToListAsync();
         }
 
         // PUT: api/Countries/5

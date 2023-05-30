@@ -54,7 +54,12 @@ namespace api.Controllers
                 return NotFound();
             }
 
-            var country =  _context.Countries.Single<Country>(c => c.code.Equals(code));
+            var country =  _context.Countries.SingleOrDefault<Country>(c => c.code.Equals(code));
+
+            if (country == null) {
+                return NotFound();
+            }
+
             var stateList = _scontext.States.Where(s => s.countryId == country.id);
 
             if (stateList == null)

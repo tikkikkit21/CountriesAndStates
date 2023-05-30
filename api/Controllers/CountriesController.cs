@@ -111,6 +111,10 @@ namespace api.Controllers
                 return Problem("Entity set 'CountryContext.Countries'  is null.");
             }
 
+            if (_context.Countries.Any<Country>(c => c.code == country.code)) {
+                return Problem(country.code + " code already exists!");
+            }
+
             var newCountry = new Country
             {
                 name = country.name,

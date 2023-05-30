@@ -85,6 +85,10 @@ namespace api.Controllers
                 return Problem("Entity set 'StateContext.States'  is null.");
             }
 
+            if (_context.States.Any<State>(c => c.code == state.code)) {
+                return Problem(state.code + " code already exists!");
+            }
+
             var newState = new State
             {
                 name = state.name,

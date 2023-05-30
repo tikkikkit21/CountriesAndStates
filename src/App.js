@@ -29,7 +29,7 @@ function App() {
                 alert (`The ${name} country was succesfully added!`);
                 setUpdate(!update);
             } else {
-                alert("Country was unable to be added");
+                alert(`Country was unable to be added: ${res.status}`);
                 console.error(res);
             }
         }).catch(err => {
@@ -55,11 +55,11 @@ function App() {
                 alert (`The ${name} state was succesfully added!`);
                 setUpdate(!update);
             } else {
-                alert("State was unable to be added");
+                alert(`State was unable to be added: ${res.status}`);
                 console.error(res);
             }
         }).catch(err => {
-            alert("State was unable to be added");
+            alert("Internal error");
             console.error(err)
         });
     }

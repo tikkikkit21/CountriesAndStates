@@ -6,10 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<CountryContext>(opt =>
-    opt.UseInMemoryDatabase("CountryList"));
-builder.Services.AddDbContext<StateContext>(opt =>
-    opt.UseInMemoryDatabase("StateList"));
+builder.Services.AddDbContext<Context>(opt =>
+    opt.UseInMemoryDatabase("XCList"));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -2,12 +2,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace XC.Models;
 
-public class StateContext : DbContext
+public class Context : DbContext
 {
-    public StateContext(DbContextOptions<StateContext> options)
+    public Context(DbContextOptions<Context> options)
         : base(options)
     {
     }
 
+    public DbSet<Country> Countries { get; set; } = null!;
     public DbSet<State> States { get; set; } = null!;
 }

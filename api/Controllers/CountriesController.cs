@@ -8,13 +8,11 @@ namespace api.Controllers
     [ApiController]
     public class CountriesController : ControllerBase
     {
-        private readonly CountryContext _context;
-        private readonly StateContext _scontext;
+        private readonly Context _context;
 
-        public CountriesController(CountryContext context, StateContext scontext)
+        public CountriesController(Context context)
         {
             _context = context;
-            _scontext = scontext;
         }
 
         // GET: api/Countries
@@ -54,20 +52,9 @@ namespace api.Controllers
                 return NotFound();
             }
 
-            var country =  _context.Countries.SingleOrDefault<Country>(c => c.code.Equals(code));
-
-            if (country == null) {
-                return NotFound();
-            }
-
-            var stateList = _scontext.States.Where(s => s.countryId == country.id);
-
-            if (stateList == null)
-            {
-                return NotFound();
-            }
-
-            return await stateList.ToListAsync();
+            return await _context.States
+                                 .Where(s => s.Country.Code == code)
+                                 .ToListAsync();
         }
 
         // PUT: api/Countries/5
@@ -75,7 +62,7 @@ namespace api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCountry(int id, Country country)
         {
-            if (id != country.id)
+            if (id != country.Id)
             {
                 return BadRequest();
             }
@@ -111,20 +98,20 @@ namespace api.Controllers
                 return Problem("Entity set 'CountryContext.Countries'  is null.");
             }
 
-            if (_context.Countries.Any<Country>(c => c.code == country.code)) {
-                return Problem(country.code + " code already exists!");
+            if (_context.Countries.Any<Country>(c => c.Code == country.Code)) {
+                return Problem(country.Code + " code already exists!");
             }
 
             var newCountry = new Country
             {
-                name = country.name,
-                code = country.code
+                Name = country.Name,
+                Code = country.Code
             };
 
             _context.Countries.Add(newCountry);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCountry), new { id = newCountry.id }, newCountry);
+            return CreatedAtAction(nameof(GetCountry), new { id = newCountry.Id }, newCountry);
         }
 
         // DELETE: api/Countries/5
@@ -149,7 +136,7 @@ namespace api.Controllers
 
         private bool CountryExists(int id)
         {
-            return (_context.Countries?.Any(e => e.id == id)).GetValueOrDefault();
+            return (_context.Countries?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

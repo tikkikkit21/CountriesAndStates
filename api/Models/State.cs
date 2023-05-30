@@ -2,8 +2,9 @@ namespace XC.Models;
 
 public class State
 {
-    public int id { get; set; }
-    public string? name { get; set; }
-    public string? code { get; set; }
-    public int countryId { get; set; }
+    public int Id { get; set; }
+    public string Name { get; set; } = "";
+    public string Code { get; set; } = "";
+    public int CountryId { get; set; }
+    public Country Country { get; set; }
 }

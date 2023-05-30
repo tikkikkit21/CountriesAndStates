@@ -8,9 +8,9 @@ namespace api.Controllers
     [ApiController]
     public class StateController : ControllerBase
     {
-        private readonly StateContext _context;
+        private readonly Context _context;
 
-        public StateController(StateContext context)
+        public StateController(Context context)
         {
             _context = context;
         }
@@ -49,7 +49,7 @@ namespace api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutState(int id, State state)
         {
-            if (id != state.id)
+            if (id != state.Id)
             {
                 return BadRequest();
             }
@@ -85,21 +85,21 @@ namespace api.Controllers
                 return Problem("Entity set 'StateContext.States'  is null.");
             }
 
-            if (_context.States.Any<State>(c => c.code == state.code)) {
-                return Problem(state.code + " code already exists!");
+            if (_context.States.Any<State>(c => c.Code == state.Code)) {
+                return Problem(state.Code + " code already exists!");
             }
 
             var newState = new State
             {
-                name = state.name,
-                code = state.code,
-                countryId = state.countryId
+                Name = state.Name,
+                Code = state.Code,
+                CountryId = state.CountryId
             };
 
             _context.States.Add(newState);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetState), new { id = newState.id }, newState);
+            return CreatedAtAction(nameof(GetState), new { id = newState.Id }, newState);
         }
 
         // DELETE: api/State/5
@@ -124,7 +124,7 @@ namespace api.Controllers
 
         private bool StateExists(int id)
         {
-            return (_context.States?.Any(e => e.id == id)).GetValueOrDefault();
+            return (_context.States?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

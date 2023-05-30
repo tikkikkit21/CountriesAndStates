@@ -17,7 +17,7 @@ function App() {
         const code = document.getElementById("code-country").value;
         const name = document.getElementById("name-country").value;
 
-        fetch('https://xc-countries-api.fly.dev/api/countries/', {
+        fetch('https://localhost:7242/api/Countries', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -33,7 +33,7 @@ function App() {
                 console.error(res);
             }
         }).catch(err => {
-            alert("Country was unable to be added");
+            alert("Internal error");
             console.error(err)
         });
     }
@@ -43,7 +43,7 @@ function App() {
         const name = document.getElementById("name-state").value;
         const countryId = document.getElementById("countries-state").value;
 
-        fetch('https://xc-countries-api.fly.dev/api/states/', {
+        fetch('https://localhost:7242/api/States', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

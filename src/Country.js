@@ -5,7 +5,7 @@ function Country({id, update, onChange, value}) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch("https://xc-countries-api.fly.dev/api/countries/")
+        fetch("https://localhost:7242/api/Countries")
         .then(res => res.json())
         .then(json => {
             json.sort((a,b) => {

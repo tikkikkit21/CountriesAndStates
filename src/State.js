@@ -5,7 +5,7 @@ function State({id, code, update}) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch(`https://xc-countries-api.fly.dev/api/countries/${code}/states/`)
+        fetch(`https://localhost:7242/api/Countries/${code}/states/`)
         .then(res => res.json())
         .then(json => {
             json.sort((a,b) => {

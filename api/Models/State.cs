@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace XC.Models;
 
 public class State
@@ -6,5 +8,7 @@ public class State
     public string Name { get; set; } = "";
     public string Code { get; set; } = "";
     public int CountryId { get; set; }
-    public Country Country { get; set; }
+    
+    [JsonIgnore]
+    public Country? Country { get; set; }
 }

@@ -3,7 +3,15 @@ services:
     build: ./api
     ports:
       - "5000:5000"
+    volumes:
+      - ./api:/api
   frontend:
     build: ./ui
     ports:
       - "3000:3000"
+    volumes:
+      - ./ui:/ui
+      - nodemodules:/src/node_modules
+
+volumes:
+  nodemodules: {}

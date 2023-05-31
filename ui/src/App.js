@@ -17,7 +17,7 @@ function App() {
         const code = document.getElementById("code-country").value;
         const name = document.getElementById("name-country").value;
 
-        fetch('https://localhost:7242/api/Countries', {
+        fetch('http://localhost:5000/api/Countries', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -43,7 +43,7 @@ function App() {
         const name = document.getElementById("name-state").value;
         const countryId = document.getElementById("countries-state").value;
 
-        fetch('https://localhost:7242/api/States', {
+        fetch('http://localhost:5000/api/States', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

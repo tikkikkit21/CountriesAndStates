@@ -5,7 +5,7 @@ function Country({id, update, onChange, value}) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch("https://localhost:7242/api/Countries")
+        fetch("http://localhost:5000/api/Countries")
         .then(res => res.json())
         .then(json => {
             json.sort((a,b) => {

@@ -5,7 +5,7 @@ function State({id, code, update}) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch(`https://localhost:7242/api/Countries/${code}/states/`)
+        fetch(`http://localhost:5000/api/Countries/${code}/states/`)
         .then(res => res.json())
         .then(json => {
             json.sort((a,b) => {

@@ -12,6 +12,13 @@ services:
     volumes:
       - ./ui:/ui
       - nodemodules:/src/node_modules
+  db:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "S3cur3P@ssW0rd!"
+      ACCEPT_EULA: "Y"
 
 volumes:
   nodemodules: {}

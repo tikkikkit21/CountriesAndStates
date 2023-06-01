@@ -1,8 +1,9 @@
 import {useState} from 'react';
-import './App.css';
-import Country from './Country';
-import State from './State';
-import Input from './Input';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Welcome from './pages/Welcome';
+import GetData from './pages/GetData';
+import AddData from './pages/AddData';
+import Navbar from './Navbar';
 
 function App() {
     const [code, setCode] = useState("X"); // prevents invalid URL for state fetching
@@ -66,17 +67,34 @@ function App() {
 
     return (
         <div className="app">
-            <h1>Countries and States</h1>
-            <Country id="countries" code={code} update={update} value="code" onChange={onChange}/>
-            <State id="states" code={code} update={update}/>
-            <Input
+            <Navbar home="Countries & States" links={[{name: "Search Data", path: "/search_data"}, {name: "Add Data", path: "/add_data"}]}/>
+
+            <BrowserRouter className="content">
+            <Routes>
+                <Route path="/" element={<Welcome />}/>
+                <Route path="search_data" element={<GetData
+                                                        code={code}
+                                                        update={update}
+                                                        onChange={onChange}
+                                                    />}/>
+                <Route path="add_data" element={<AddData
+                                                    code={code}
+                                                    update={update}
+                                                    onClickCountry={onClickCountry}
+                                                    onClickState={onClickState}
+                                                />}/>
+            </Routes>
+            </BrowserRouter>
+            
+            {/* <Input
                 label="country"
                 info={[
                     {name: "code", id: "code-country"},
                     {name: "name", id: "name-country"}
                 ]}
             />
-            <input type="submit" onClick={onClickCountry}/>
+            <input className="btn btn-primary" type="submit" onClick={onClickCountry}/>
+            
             <Input
                 label="state"
                 info={[
@@ -85,7 +103,7 @@ function App() {
                 ]}
             />
             <Country id="countries-state" code={code} update={update} value="id" onChange={onChange}/>
-            <input type="submit" onClick={onClickState}/>
+            <input className="btn btn-primary" type="submit" onClick={onClickState}/> */}
         </div>
     );
 }

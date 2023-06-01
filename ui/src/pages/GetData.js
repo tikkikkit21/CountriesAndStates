@@ -4,9 +4,9 @@ import State from '../State';
 
 function GetData({code, update, onChange}) {
     return (
-        <div className="py-2 px-5">
+        <div className="container py-2 px-5">
             <h1 className="text-center pb-3">Lookup Data</h1>
-            <div className="d-flex justify-content-center">
+            <div className="row d-flex justify-content-center ">
                 <Country
                     id="countries"
                     code={code}

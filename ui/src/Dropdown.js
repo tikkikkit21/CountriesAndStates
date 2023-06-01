@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 
 function Dropdown({id, menuLabel, data, onChange}) {
     return (
-        <div className="dropdown p-1 w-25">
+        <div className="col-sm-5 dropdown p-1">
             <Form.Select className="p-1 " name={id} id={id} onChange={onChange}>
                 <option key="select" value="X">-Select a {menuLabel}-</option>
                 {

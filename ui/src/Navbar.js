@@ -1,29 +1,27 @@
-import React from 'react';
-import "bootstrap/js/src/collapse.js";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 
-function Navbar({home, links}) {
+function MyNavbar({ home, links }) {
     const barLinks = links.map(link => {
         return (
-            <li key={link.name} className="nav-item">
-                <a className="nav-link" href={link.path}>{link.name}</a>
-            </li>
-        )
-    })
+            <Nav.Link href={link.path}>{link.name}</Nav.Link>
+        );
+    });
 
     return (
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-3">
-            <a className="navbar-brand" href="/">{home}</a>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-            <span className="navbar-toggler-icon"></span>
-            </button>
-
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                {barLinks}
-                </ul>
-            </div>
-        </nav>
+        <Navbar bg="dark" variant="dark" expand="sm">
+            <Container>
+                <Navbar.Brand href="/">{home}</Navbar.Brand>
+                <Navbar.Toggle />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        {barLinks}
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     );
 }
 
-export default Navbar;
+export default MyNavbar;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Welcome from './pages/Welcome';
 import GetData from './pages/GetData';
@@ -14,18 +14,20 @@ function App() {
         setCode(d);
     }
 
-    function onClickCountry() {
+    async function onClickCountry() {
         const code = (document.getElementById("code-country") as HTMLInputElement).value;
         const name = (document.getElementById("name-country") as HTMLInputElement).value;
 
-        fetch('http://localhost:5000/api/Countries', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({"code": code, "name": name})
-        }).then(res => {
+        try {
+            const res = await fetch('http://localhost:5000/api/Countries', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({"code": code, "name": name})
+            });
+
             if (res.ok) {
                 alert (`The ${name} country was succesfully added!`);
                 setUpdate(!update);
@@ -33,25 +35,27 @@ function App() {
                 alert(`Country was unable to be added: ${res.status}`);
                 console.error(res);
             }
-        }).catch(err => {
+        } catch(e) {
             alert("Internal error");
-            console.error(err)
-        });
+            console.error(e);
+        }
     }
 
-    function onClickState() {
+    async function onClickState() {
         const code = (document.getElementById("code-state") as HTMLInputElement).value;
         const name = (document.getElementById("name-state") as HTMLInputElement).value;
         const countryId = (document.getElementById("countries-state") as HTMLInputElement).value;
 
-        fetch('http://localhost:5000/api/States', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({"code": code, "name": name, "countryId": countryId})
-        }).then(res => {
+        try {
+            const res = await fetch('http://localhost:5000/api/States', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({"code": code, "name": name, "countryId": countryId})
+            });
+
             if (res.ok) {
                 alert (`The ${name} state was succesfully added!`);
                 setUpdate(!update);
@@ -59,10 +63,10 @@ function App() {
                 alert(`State was unable to be added: ${res.status}`);
                 console.error(res);
             }
-        }).catch(err => {
+        } catch(e) {
             alert("Internal error");
-            console.error(err)
-        });
+            console.error(e);
+        }
     }
 
     return (

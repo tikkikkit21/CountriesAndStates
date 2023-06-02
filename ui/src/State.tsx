@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import Dropdown from './Dropdown'
 
 type Props = {
@@ -23,18 +23,18 @@ type StateData = {
 function State({id, code, update}: Props) {
     const [data, setData] = useState([]);
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/api/Countries/${code}/states/`)
-        .then(res => res.json())
-        .then(json => {
-            json.sort((a: StateData, b: StateData) => {
-                return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;
-            })
+    async function getStates() {
+        const res = await fetch(`http://localhost:5000/api/Countries/${code}/states/`);
+        const json = await res.json();
+        
+        json.sort((a: StateData, b: StateData) => {
+            return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;
+        });
 
-            setData(json);
-        })
-        .catch(err => console.error(err));
-    }, [code, update])
+        setData(json);
+    }
+
+    useEffect(() => {getStates()}, [code, update]);
 
     return <Dropdown
         id={id}

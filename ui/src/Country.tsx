@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler, useEffect, useState} from 'react';
+import {ChangeEventHandler, useEffect, useState} from 'react';
 import Dropdown from './Dropdown';
 
 type Props = {
@@ -17,18 +17,16 @@ type CountryData = {
 function Country({id, update, onChange, value}: Props) {
     const [data, setData] = useState([]);
 
-    useEffect(() => {
-        fetch("http://localhost:5000/api/Countries")
-        .then(res => res.json())
-        .then(json => {
-            json.sort((a: CountryData, b: CountryData) => {
-                return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;
-            })
+    async function getCountries() {
+        const res = await fetch("http://localhost:5000/api/Countries");
+        const json = await res.json();
+    
+        json.sort((a: CountryData, b: CountryData) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1);
+    
+        setData(json);
+    }
 
-            setData(json);
-        })
-        .catch(err => console.error(err));
-    }, [update])
+    useEffect(() => {getCountries()}, [update]);
 
     return <Dropdown
         id={id}

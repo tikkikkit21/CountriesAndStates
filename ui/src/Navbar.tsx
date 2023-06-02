@@ -1,4 +1,3 @@
-import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
@@ -15,7 +14,7 @@ type Props = {
 function MyNavbar({ home, links }: Props) {
     const barLinks = links.map(link => {
         return (
-            <Nav.Link href={link.path}>{link.name}</Nav.Link>
+            <Nav.Link key={link.name} href={link.path}>{link.name}</Nav.Link>
         );
     });
 

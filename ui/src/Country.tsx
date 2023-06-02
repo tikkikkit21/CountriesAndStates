@@ -1,5 +1,6 @@
 import {ChangeEventHandler, useEffect, useState} from 'react';
 import Dropdown from './Dropdown';
+import axios from 'axios';
 
 type Props = {
     id: string,
@@ -15,15 +16,12 @@ type CountryData = {
 }
 
 function Country({id, update, onChange, value}: Props) {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<CountryData[]>([]);
 
     async function getCountries() {
-        const res = await fetch("http://localhost:5000/api/Countries");
-        const json = await res.json();
-    
-        json.sort((a: CountryData, b: CountryData) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1);
-    
-        setData(json);
+        const data: CountryData[] = (await axios.get("http://localhost:5000/api/Countries")).data;
+        data.sort((a, b) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1);
+        setData(data);
     }
 
     useEffect(() => {getCountries()}, [update]);

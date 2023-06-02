@@ -4,6 +4,7 @@ import Welcome from './pages/Welcome';
 import GetData from './pages/GetData';
 import AddData from './pages/AddData';
 import Navbar from './Navbar';
+import axios from 'axios';
 
 function App() {
     const [code, setCode] = useState("X"); // prevents invalid URL for state fetching
@@ -19,16 +20,13 @@ function App() {
         const name = (document.getElementById("name-country") as HTMLInputElement).value;
 
         try {
-            const res = await fetch('http://localhost:5000/api/Countries', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({"code": code, "name": name})
-            });
+            const res = await axios.post(
+                'http://localhost:5000/api/Countries',
+                { "code": code, "name": name },
+                { headers: { 'Content-Type': 'application/json' } }
+            );
 
-            if (res.ok) {
+            if (res.status) {
                 alert (`The ${name} country was succesfully added!`);
                 setUpdate(!update);
             } else {
@@ -47,16 +45,13 @@ function App() {
         const countryId = (document.getElementById("countries-state") as HTMLInputElement).value;
 
         try {
-            const res = await fetch('http://localhost:5000/api/States', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({"code": code, "name": name, "countryId": countryId})
-            });
+            const res = await axios.post(
+                'http://localhost:5000/api/States',
+                { "code": code, "name": name, "countryId": countryId },
+                { headers:{ 'Content-Type': 'application/json' } }
+            );
 
-            if (res.ok) {
+            if (res.status === 201) {
                 alert (`The ${name} state was succesfully added!`);
                 setUpdate(!update);
             } else {

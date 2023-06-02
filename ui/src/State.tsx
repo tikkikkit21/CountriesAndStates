@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
-import Dropdown from './Dropdown'
+import Dropdown from './Dropdown';
+import axios from 'axios';
 
 type Props = {
     id: string,
@@ -21,17 +22,12 @@ type StateData = {
 }
 
 function State({id, code, update}: Props) {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<StateData[]>([]);
 
     async function getStates() {
-        const res = await fetch(`http://localhost:5000/api/Countries/${code}/states/`);
-        const json = await res.json();
-        
-        json.sort((a: StateData, b: StateData) => {
-            return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;
-        });
-
-        setData(json);
+        const data: StateData[] = (await axios.get(`http://localhost:5000/api/Countries/${code}/states/`)).data;
+        data.sort((a, b) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1);
+        setData(data);
     }
 
     useEffect(() => {getStates()}, [code, update]);

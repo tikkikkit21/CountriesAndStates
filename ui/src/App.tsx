@@ -20,21 +20,13 @@ function App() {
         const name = (document.getElementById("name-country") as HTMLInputElement).value;
 
         try {
-            const res = await axios.post(
+            await axios.post(
                 'http://localhost:5000/api/Countries',
                 { "code": code, "name": name },
                 { headers: { 'Content-Type': 'application/json' } }
             );
-
-            if (res.status === 201) {
-                alert (`The ${name} country was succesfully added!`);
-                setUpdate(!update);
-            } else {
-                alert(`Country was unable to be added: ${res.status}`);
-                console.error(res);
-            }
         } catch(e) {
-            alert("Internal error");
+            alert(`Country was unable to be added`);
             console.error(e);
         }
     }
@@ -45,21 +37,16 @@ function App() {
         const countryId = (document.getElementById("countries-state") as HTMLInputElement).value;
 
         try {
-            const res = await axios.post(
+            await axios.post(
                 'http://localhost:5000/api/States',
                 { "code": code, "name": name, "countryId": countryId },
                 { headers:{ 'Content-Type': 'application/json' } }
             );
 
-            if (res.status === 201) {
-                alert (`The ${name} state was succesfully added!`);
-                setUpdate(!update);
-            } else {
-                alert(`State was unable to be added: ${res.status}`);
-                console.error(res);
-            }
+            alert (`The ${name} state was succesfully added!`);
+            setUpdate(!update);
         } catch(e) {
-            alert("Internal error");
+            alert(`State was unable to be added`);
             console.error(e);
         }
     }

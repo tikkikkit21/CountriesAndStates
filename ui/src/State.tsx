@@ -25,7 +25,7 @@ function State({id, code, update}: Props) {
     const [data, setData] = useState<StateData[]>([]);
 
     async function getStates() {
-        const data: StateData[] = (await axios.get(`http://localhost:5000/api/Countries/${code}/states/`)).data;
+        const {data} = await axios.get<StateData[]>(`http://localhost:5000/api/Countries/${code}/states/`);
         data.sort((a, b) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1);
         setData(data);
     }

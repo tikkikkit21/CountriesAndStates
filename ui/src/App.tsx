@@ -26,7 +26,7 @@ function App() {
                 { headers: { 'Content-Type': 'application/json' } }
             );
 
-            if (res.status) {
+            if (res.status === 201) {
                 alert (`The ${name} country was succesfully added!`);
                 setUpdate(!update);
             } else {

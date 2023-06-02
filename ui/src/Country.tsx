@@ -1,7 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {ChangeEventHandler, useEffect, useState} from 'react';
 import Dropdown from './Dropdown';
 
-function Country({id, update, onChange, value}) {
+type Props = {
+    id: string,
+    update: boolean,
+    onChange?: ChangeEventHandler,
+    value: string
+}
+
+function Country({id, update, onChange, value}: Props) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -20,7 +27,8 @@ function Country({id, update, onChange, value}) {
     return <Dropdown
         id={id}
         menuLabel="country"
-        data={data.map(d => {
+        data={data.map((d) => {
+            // @ts-ignore
             return {key: d.id, value: d[value], text: d.name};
         })}
         onChange={onChange}

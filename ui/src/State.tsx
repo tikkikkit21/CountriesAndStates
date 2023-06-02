@@ -1,7 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import Dropdown from './Dropdown'
 
-function State({id, code, update}) {
+type Props = {
+    id: string,
+    code: string,
+    update: boolean
+}
+
+function State({id, code, update}: Props) {
     const [data, setData] = useState([]);
 
     useEffect(() => {

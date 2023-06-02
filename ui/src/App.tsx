@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Welcome from './pages/Welcome';
 import GetData from './pages/GetData';
@@ -10,13 +10,13 @@ function App() {
     const [update, setUpdate] = useState(true);
 
     function onChange() {
-        const d = document.getElementById("countries").value;
+        const d = (document.getElementById("countries") as HTMLInputElement).value;
         setCode(d);
     }
 
     function onClickCountry() {
-        const code = document.getElementById("code-country").value;
-        const name = document.getElementById("name-country").value;
+        const code = (document.getElementById("code-country") as HTMLInputElement).value;
+        const name = (document.getElementById("name-country") as HTMLInputElement).value;
 
         fetch('http://localhost:5000/api/Countries', {
             method: 'POST',
@@ -40,9 +40,9 @@ function App() {
     }
 
     function onClickState() {
-        const code = document.getElementById("code-state").value;
-        const name = document.getElementById("name-state").value;
-        const countryId = document.getElementById("countries-state").value;
+        const code = (document.getElementById("code-state") as HTMLInputElement).value;
+        const name = (document.getElementById("name-state") as HTMLInputElement).value;
+        const countryId = (document.getElementById("countries-state") as HTMLInputElement).value;
 
         fetch('http://localhost:5000/api/States', {
             method: 'POST',
@@ -69,7 +69,7 @@ function App() {
         <div className="app">
             <Navbar home="Countries & States" links={[{name: "Search Data", path: "/search_data"}, {name: "Add Data", path: "/add_data"}]}/>
 
-            <BrowserRouter className="content">
+            <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Welcome />}/>
                 <Route path="search_data" element={<GetData
@@ -78,32 +78,12 @@ function App() {
                                                         onChange={onChange}
                                                     />}/>
                 <Route path="add_data" element={<AddData
-                                                    code={code}
                                                     update={update}
                                                     onClickCountry={onClickCountry}
                                                     onClickState={onClickState}
                                                 />}/>
             </Routes>
             </BrowserRouter>
-            
-            {/* <Input
-                label="country"
-                info={[
-                    {name: "code", id: "code-country"},
-                    {name: "name", id: "name-country"}
-                ]}
-            />
-            <input className="btn btn-primary" type="submit" onClick={onClickCountry}/>
-            
-            <Input
-                label="state"
-                info={[
-                    {name: "code", id: "code-state"},
-                    {name: "name", id: "name-state"}
-                ]}
-            />
-            <Country id="countries-state" code={code} update={update} value="id" onChange={onChange}/>
-            <input className="btn btn-primary" type="submit" onClick={onClickState}/> */}
         </div>
     );
 }

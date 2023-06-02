@@ -1,4 +1,5 @@
 import React from 'react';
+// @ts-ignore
 import globe from './rotating_globe.gif';
 
 function Welcome() {

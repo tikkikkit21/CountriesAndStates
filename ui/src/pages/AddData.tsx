@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import Input from '../Input';
 import Country from '../Country';
 import Button from 'react-bootstrap/Button';
@@ -7,7 +7,13 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function AddData({code, update, onClickCountry, onClickState}) {
+type Props = {
+    update: boolean,
+    onClickCountry: MouseEventHandler,
+    onClickState: MouseEventHandler
+}
+
+function AddData({update, onClickCountry, onClickState}: Props) {
     return (
         <Container>
             <h1 className="text-center pt-2 pb-3">Add Data</h1>
@@ -35,7 +41,6 @@ function AddData({code, update, onClickCountry, onClickState}) {
                 <Col className="p-2" xs={7} sm={10} md={4} lg={4}>
                     <Country
                         id="countries-state"
-                        code={code}
                         update={update}
                         value="id"
                     />

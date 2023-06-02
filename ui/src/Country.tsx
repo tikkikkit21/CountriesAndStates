@@ -5,7 +5,13 @@ type Props = {
     id: string,
     update: boolean,
     onChange?: ChangeEventHandler,
-    value: string
+    value: string | number
+}
+
+type CountryData = {
+    id: number,
+    code: string,
+    name: string
 }
 
 function Country({id, update, onChange, value}: Props) {
@@ -15,7 +21,7 @@ function Country({id, update, onChange, value}: Props) {
         fetch("http://localhost:5000/api/Countries")
         .then(res => res.json())
         .then(json => {
-            json.sort((a,b) => {
+            json.sort((a: CountryData, b: CountryData) => {
                 return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;
             })
 
@@ -27,9 +33,8 @@ function Country({id, update, onChange, value}: Props) {
     return <Dropdown
         id={id}
         menuLabel="country"
-        data={data.map((d) => {
-            // @ts-ignore
-            return {key: d.id, value: d[value], text: d.name};
+        data={data.map((d: CountryData) => {
+            return {key: d.id, value: d[value as keyof CountryData], text: d.name};
         })}
         onChange={onChange}
     />;

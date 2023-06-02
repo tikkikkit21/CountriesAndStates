@@ -2,8 +2,8 @@ import React, { ChangeEventHandler } from 'react';
 import Form from 'react-bootstrap/Form';
 
 type Data = {
-    key: string,
-    value: string,
+    key: number,
+    value: string | number,
     text: string
 }
 
@@ -19,7 +19,7 @@ function Dropdown({id, menuLabel, data, onChange}: Props) {
         <Form.Select name={id} id={id} onChange={onChange}>
             <option key="select" value="X">-Select a {menuLabel}-</option>
             {
-                data.map(d => <option key={d.key} id={d.key} value={d.value}>{d.text}</option>)
+                data.map(d => <option key={d.key} id={d.key.toString()} value={d.value}>{d.text}</option>)
             }
         </Form.Select>
     )

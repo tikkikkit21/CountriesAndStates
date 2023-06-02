@@ -2,7 +2,17 @@ import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-function MyNavbar({ home, links }) {
+type LinkObj = {
+    path: string,
+    name: string
+}
+
+type Props = {
+    home: string,
+    links: Array<LinkObj>
+}
+
+function MyNavbar({ home, links }: Props) {
     const barLinks = links.map(link => {
         return (
             <Nav.Link href={link.path}>{link.name}</Nav.Link>

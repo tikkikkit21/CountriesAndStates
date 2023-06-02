@@ -1,14 +1,13 @@
 import React from 'react';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 
-function Input({label, info, onClick}) {
+function Input({name, id}) {
     return (
-        <div className="p-1">
-            <label htmlFor={label}>Enter a {label}:</label>
-            {
-                info.map(i => <input className="mx-2" key={i.id} id={i.id} required type="text" name={i.name} placeholder={"Enter a " + i.name}/>)
-            }
-        </div>
-    )
+        <FloatingLabel label={"Enter a " + name}>
+            <Form.Control id={id} required type="text" name={name} placeholder={"Enter a " + name}/>
+        </FloatingLabel>
+    );
 }
 
 export default Input;

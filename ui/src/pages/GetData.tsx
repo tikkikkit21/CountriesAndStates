@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from 'react';
+import { ChangeEventHandler } from 'react';
 import Country from '../Country';
 import State from '../State';
 
@@ -12,7 +12,7 @@ type Props = {
     onChange: ChangeEventHandler<HTMLSelectElement>
 }
 
-function GetData({code, update, onChange}: Props) {
+function GetData({ code, update, onChange }: Props) {
     return (
         <Container>
             <h1 className="text-center pt-2 pb-3">Lookup Data</h1>

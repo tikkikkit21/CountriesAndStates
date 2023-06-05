@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from 'react';
+import { ChangeEventHandler } from 'react';
 import Form from 'react-bootstrap/Form';
 
 type Data = {
@@ -14,7 +14,7 @@ type Props = {
     onChange?: ChangeEventHandler
 }
 
-function Dropdown({id, menuLabel, data, onChange}: Props) {
+function Dropdown({ id, menuLabel, data, onChange }: Props) {
     return (
         <Form.Select name={id} id={id} onChange={onChange}>
             <option key="select" value="X">-Select a {menuLabel}-</option>

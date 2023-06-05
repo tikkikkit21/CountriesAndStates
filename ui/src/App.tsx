@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Welcome from './pages/Welcome';
 import GetData from './pages/GetData';
@@ -25,7 +25,7 @@ function App() {
                 { "code": code, "name": name },
                 { headers: { 'Content-Type': 'application/json' } }
             );
-        } catch(e) {
+        } catch (e) {
             alert(`Country was unable to be added`);
             console.error(e);
         }
@@ -40,12 +40,12 @@ function App() {
             await axios.post(
                 'http://localhost:5000/api/States',
                 { "code": code, "name": name, "countryId": countryId },
-                { headers:{ 'Content-Type': 'application/json' } }
+                { headers: { 'Content-Type': 'application/json' } }
             );
 
-            alert (`The ${name} state was succesfully added!`);
+            alert(`The ${name} state was succesfully added!`);
             setUpdate(!update);
-        } catch(e) {
+        } catch (e) {
             alert(`State was unable to be added`);
             console.error(e);
         }
@@ -53,22 +53,28 @@ function App() {
 
     return (
         <div className="app">
-            <Navbar home="Countries & States" links={[{name: "Search Data", path: "/search_data"}, {name: "Add Data", path: "/add_data"}]}/>
+            <Navbar
+                home="Countries & States"
+                links={[
+                    { name: "Search Data", path: "/search_data" },
+                    { name: "Add Data", path: "/add_data" }
+                ]}
+            />
 
             <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Welcome />}/>
-                <Route path="search_data" element={<GetData
-                                                        code={code}
-                                                        update={update}
-                                                        onChange={onChange}
-                                                    />}/>
-                <Route path="add_data" element={<AddData
-                                                    update={update}
-                                                    onClickCountry={onClickCountry}
-                                                    onClickState={onClickState}
-                                                />}/>
-            </Routes>
+                <Routes>
+                    <Route path="/" element={<Welcome />} />
+                    <Route path="search_data" element={<GetData
+                        code={code}
+                        update={update}
+                        onChange={onChange}
+                    />} />
+                    <Route path="add_data" element={<AddData
+                        update={update}
+                        onClickCountry={onClickCountry}
+                        onClickState={onClickState}
+                    />} />
+                </Routes>
             </BrowserRouter>
         </div>
     );

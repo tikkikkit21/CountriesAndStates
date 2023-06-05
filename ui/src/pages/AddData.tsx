@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import { MouseEventHandler } from 'react';
 import Input from '../Input';
 import Country from '../Country';
 import Button from 'react-bootstrap/Button';
@@ -13,20 +13,20 @@ type Props = {
     onClickState: MouseEventHandler
 }
 
-function AddData({update, onClickCountry, onClickState}: Props) {
+function AddData({ update, onClickCountry, onClickState }: Props) {
     return (
         <Container>
             <h1 className="text-center pt-2 pb-3">Add Data</h1>
             <h2>Add a country</h2>
             <Row className="pb-5 d-flex align-items-center">
                 <Col className="p-2" xs={7} sm={4} md={3} lg={2}>
-                    <Input name="code" id="code-country"/>
+                    <Input name="code" id="code-country" />
                 </Col>
                 <Col className="p-2" xs={7} sm={6} md={5} lg={4}>
-                    <Input name="name" id="name-country"/>
+                    <Input name="name" id="name-country" />
                 </Col>
                 <Col className="p-2" xs={7} sm={2} lg={1}>
-                    <Button variant="primary" as="input" type="submit" onClick={onClickCountry}/>
+                    <Button variant="primary" as="input" type="submit" onClick={onClickCountry} />
                 </Col>
             </Row>
 
@@ -47,7 +47,7 @@ function AddData({update, onClickCountry, onClickState}: Props) {
                 </Col>
 
                 <Col className="p-2" xs={7} sm={2} md={1}>
-                    <Button variant="primary" as="input" type="submit" onClick={onClickState}/>
+                    <Button variant="primary" as="input" type="submit" onClick={onClickState} />
                 </Col>
             </Row>
         </Container>

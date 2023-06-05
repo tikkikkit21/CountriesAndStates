@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Dropdown from './Dropdown';
 import axios from 'axios';
 
@@ -21,22 +21,22 @@ type StateData = {
     countryId: number
 }
 
-function State({id, code, update}: Props) {
+function State({ id, code, update }: Props) {
     const [data, setData] = useState<StateData[]>([]);
 
     async function getStates() {
-        const {data} = await axios.get<StateData[]>(`http://localhost:5000/api/Countries/${code}/states/`);
+        const { data } = await axios.get<StateData[]>(`http://localhost:5000/api/Countries/${code}/states/`);
         data.sort((a, b) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1);
         setData(data);
     }
 
-    useEffect(() => {getStates()}, [code, update]);
+    useEffect(() => { getStates() }, [code, update]);
 
     return <Dropdown
         id={id}
         menuLabel="state"
         data={data.map((d: CountryData) => {
-            return {key: d.id, value: d.code, text: d.name}
+            return { key: d.id, value: d.code, text: d.name }
         })}
     />;
 }

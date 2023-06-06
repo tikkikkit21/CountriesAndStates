@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import GetData from '../pages/GetData';
+import GetData from '../src/pages/GetData';
 
 describe('GetData', () => {
     it('renders GetData page', () => {

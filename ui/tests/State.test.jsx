@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import State from '../State';
+import State from '../src/State';
 
 describe("State", () => {
     it("renders State component", async () => {

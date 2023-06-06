@@ -16,10 +16,10 @@ type Props = {
 
 function Dropdown({ id, menuLabel, data, onChange }: Props) {
     return (
-        <Form.Select name={id} id={id} onChange={onChange}>
+        <Form.Select name={id} id={id} onChange={onChange} data-testid={id} >
             <option key="select" value="X">-Select a {menuLabel}-</option>
             {
-                data.map(d => <option key={d.key} id={d.key.toString()} value={d.value}>{d.text}</option>)
+                data.map(d => <option key={d.key} id={d.key.toString()} value={d.value} data-testid="testOption">{d.text}</option>)
             }
         </Form.Select>
     )

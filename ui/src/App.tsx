@@ -64,12 +64,12 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Welcome />} />
-                    <Route path="search_data" element={<GetData
+                    <Route path="/search_data" element={<GetData
                         code={code}
                         update={update}
                         onChange={onChange}
                     />} />
-                    <Route path="add_data" element={<AddData
+                    <Route path="/add_data" element={<AddData
                         update={update}
                         onClickCountry={onClickCountry}
                         onClickState={onClickState}

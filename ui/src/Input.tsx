@@ -8,8 +8,8 @@ type Props = {
 
 function Input({ name, id }: Props) {
     return (
-        <FloatingLabel label={"Enter a " + name}>
-            <Form.Control id={id} required type="text" name={name} placeholder={"Enter a " + name} />
+        <FloatingLabel label={"Enter a " + name} controlId={id}>
+            <Form.Control required type="text" name={name} placeholder={"Enter a " + name} />
         </FloatingLabel>
     );
 }

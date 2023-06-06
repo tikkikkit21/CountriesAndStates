@@ -4,7 +4,7 @@ import AddData from '../pages/AddData';
 describe('AddData', () => {
     it('renders AddData page', () => {
         render(<AddData />);
-        screen.debug();
+        // screen.debug();
 
         // headers
         expect(screen.getByText("Add Data")).toBeInTheDocument();

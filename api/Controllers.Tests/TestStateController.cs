@@ -1,7 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using Moq;
-using Microsoft.EntityFrameworkCore;
 using Moq.EntityFrameworkCore;
+using FluentAssertions;
 
 using api.Controllers;
 using XC.Models;
@@ -37,8 +38,10 @@ public class TestStatesController
     public async Task GetStates_WhenCalled_ReturnsAllStates()
     {
         var states = (await _controller.GetStates()).Value;
-        Assert.NotNull(states);
-        Assert.AreEqual(2, states.Count());
+
+        states.Should().NotBeEmpty()
+                   .And.HaveCount(2)
+                   .And.Equal(statesList);
     }
 
     [TestCase(1)]
@@ -49,19 +52,20 @@ public class TestStatesController
             .ReturnsAsync(statesList.Find(c => c.Id == id));
 
         var state = (await _controller.GetState(id)).Value;
-        Assert.NotNull(state);
-        Assert.AreEqual(id, state.Id);
+
+        state.Should().NotBeNull()
+                  .And.Be(statesList[id - 1]);
     }
 
-    [TestCase(0)]
-    [TestCase(3)]
-    public async Task GetState_InvalidInput_ReturnsNotFound(int id)
+    [Test]
+    public async Task GetState_InvalidInput_ReturnsNotFound()
     {
-        mock.Setup(x => x.States.FindAsync(id))
-            .ReturnsAsync(statesList.Find(c => c.Id == id));
+        mock.Setup(x => x.States.FindAsync(It.IsAny<int>()))
+            .ReturnsAsync((State)null);
 
-        var state = (await _controller.GetState(id)).Value;
-        Assert.Null(state);
+        var state = (await _controller.GetState(2)).Value;
+
+        state.Should().BeNull();
     }
 
     [Test]

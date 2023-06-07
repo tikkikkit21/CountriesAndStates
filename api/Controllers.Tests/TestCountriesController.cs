@@ -1,7 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using Moq;
-using Microsoft.EntityFrameworkCore;
 using Moq.EntityFrameworkCore;
+using FluentAssertions;
 
 using api.Controllers;
 using XC.Models;
@@ -39,7 +40,7 @@ public class TestCountriesController
 
         mock.Setup<DbSet<State>>(x => x.States)
             .ReturnsDbSet(statesList);
-        
+
         _controller = new CountriesController(mock.Object);
     }
 
@@ -47,8 +48,10 @@ public class TestCountriesController
     public async Task GetCountries_WhenCalled_ReturnsAllCountries()
     {
         var countries = (await _controller.GetCountries()).Value;
-        Assert.NotNull(countries);
-        Assert.AreEqual(3, countries.Count());
+
+        countries.Should().NotBeEmpty()
+                          .And.HaveCount(3)
+                          .And.Equal(countriesList);
     }
 
     [TestCase(1)]
@@ -60,25 +63,29 @@ public class TestCountriesController
             .ReturnsAsync(countriesList.Find(c => c.Id == id));
 
         var country = (await _controller.GetCountry(id)).Value;
-        Assert.NotNull(country);
-        Assert.AreEqual(id, country.Id);
+
+        country.Should().NotBeNull()
+                    .And.Be(countriesList[id - 1]);
     }
 
+    [Test]
     public async Task GetCountry_InvalidInput_ReturnsNotFound()
     {
         mock.Setup(x => x.Countries.FindAsync(It.IsAny<int>()))
             .ReturnsAsync((Country)null);
 
-        var response = await _controller.GetCountry(2);
-
         var country = (await _controller.GetCountry(2)).Value;
-        Assert.Null(country);
+
+        country.Should().BeNull();
     }
 
     [Test]
     public async Task GetStates_WhenCalled_ReturnsStates()
     {
-        await _controller.GetStates("a");
+        var states = (await _controller.GetStates("C1")).Value;
+
+        states.Should().HaveCount(1)
+                   .And.Contain(statesList[0]);
     }
 
     [Test]

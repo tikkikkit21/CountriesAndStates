@@ -56,8 +56,8 @@ public class TestCountriesController
     [TestCase(3)]
     public async Task GetCountry_ValidInput_ReturnsCountry(int id)
     {
-        mock.Setup(x => x.Countries.FindAsync(id).Result)
-            .Returns(countriesList.Find(c => c.Id == id));
+        mock.Setup(x => x.Countries.FindAsync(id))
+            .ReturnsAsync(countriesList.Find(c => c.Id == id));
 
         var country = (await _controller.GetCountry(id)).Value;
         Assert.NotNull(country);

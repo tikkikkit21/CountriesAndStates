@@ -45,8 +45,8 @@ public class TestStatesController
     [TestCase(2)]
     public async Task GetState_ValidInput_ReturnsState(int id)
     {
-        mock.Setup(x => x.States.FindAsync(id).Result)
-            .Returns(statesList.Find(c => c.Id == id));
+        mock.Setup(x => x.States.FindAsync(id))
+            .ReturnsAsync(statesList.Find(c => c.Id == id));
 
         var state = (await _controller.GetState(id)).Value;
         Assert.NotNull(state);
@@ -57,8 +57,8 @@ public class TestStatesController
     [TestCase(3)]
     public async Task GetState_InvalidInput_ReturnsNotFound(int id)
     {
-        mock.Setup(x => x.States.FindAsync(id).Result)
-            .Returns(statesList.Find(c => c.Id == id));
+        mock.Setup(x => x.States.FindAsync(id))
+            .ReturnsAsync(statesList.Find(c => c.Id == id));
 
         var state = (await _controller.GetState(id)).Value;
         Assert.Null(state);

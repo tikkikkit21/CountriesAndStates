@@ -4,14 +4,15 @@ namespace XC.Models;
 
 public class Context : DbContext
 {
+    public Context() {}
     public Context(DbContextOptions<Context> options)
         : base(options)
     {
         Database.EnsureCreated();
     }
 
-    public DbSet<Country> Countries { get; set; } = null!;
-    public DbSet<State> States { get; set; } = null!;
+    public virtual DbSet<Country> Countries { get; set; } = null!;
+    public virtual DbSet<State> States { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

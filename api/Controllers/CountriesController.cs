@@ -47,7 +47,7 @@ namespace api.Controllers
         [HttpGet("{code}/states")]
         public async Task<ActionResult<IEnumerable<State>>> GetStates(string? code)
         {
-            if (_context.Countries == null)
+            if (_context.States == null)
             {
                 return NotFound();
             }
@@ -55,37 +55,6 @@ namespace api.Controllers
             return await _context.States
                                  .Where(s => s.Country.Code == code)
                                  .ToListAsync();
-        }
-
-        // PUT: api/Countries/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCountry(int id, Country country)
-        {
-            if (id != country.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(country).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CountryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
         }
 
         // POST: api/Countries
@@ -112,31 +81,6 @@ namespace api.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetCountry), new { id = newCountry.Id }, newCountry);
-        }
-
-        // DELETE: api/Countries/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCountry(int id)
-        {
-            if (_context.Countries == null)
-            {
-                return NotFound();
-            }
-            var country = await _context.Countries.FindAsync(id);
-            if (country == null)
-            {
-                return NotFound();
-            }
-
-            _context.Countries.Remove(country);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool CountryExists(int id)
-        {
-            return (_context.Countries?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
